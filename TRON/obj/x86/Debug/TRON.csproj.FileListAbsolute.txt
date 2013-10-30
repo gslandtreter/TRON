@@ -36,3 +36,13 @@ D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\bin\Debug\OpenTK.xml
 D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
 D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
 D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\TRON.exe.config
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Debug\TRON.exe
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Debug\TRON.pdb
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\TRON.exe
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\TRON.pdb
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\OpenTK.dll
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\OpenTK.xml

@@ -20,7 +20,8 @@ namespace TRON
     {
         Mesh cycle;
         Mapa myMap;
-        Camera camera;
+        //DebugCamera camera;
+        ThirdPersonCamera thirdPersonCamera;
         Player player1;
         Player player2;
 
@@ -36,7 +37,7 @@ namespace TRON
             base.OnLoad(e);
 
             myMap = new Mapa();
-            camera = new Camera();
+            thirdPersonCamera = new ThirdPersonCamera();
             player1 = new Player();
             player2 = new Player();
 
@@ -53,7 +54,9 @@ namespace TRON
             {
                 player1.textureID = cycle.LoadTexture("Textures//bike blue.png"); //TODO: Wrap to texture loader
                 player2.textureID = cycle.LoadTexture("Textures//bike red.png"); //TODO: Wrap to texture loader
-                
+
+                myMap.texturaChao = Texture.LoadTex("Textures//grid.jpg");
+
                 cycle.LoadBuffers();
 
                 player1.mesh = cycle;
@@ -62,6 +65,8 @@ namespace TRON
 
             player1.position = new Vector3(10, 0, 10);
             player2.position = new Vector3(15, 0, 10);
+
+            player2.speed = 12;
 
             myMap.loadMap("map.txt");
         }
@@ -104,10 +109,10 @@ namespace TRON
                 return;
             }
 
-            player1.updatePlayerPos(Keyboard);
-            player2.updatePlayerPos(Keyboard);
+            player1.updatePlayerPos(Keyboard, e.Time);
+            player2.updatePlayerPos(Keyboard, e.Time);
 
-            camera.updateCamera(Keyboard, Mouse);
+            //camera.updateCamera(Keyboard, Mouse);
 
         }
 
@@ -117,11 +122,10 @@ namespace TRON
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            Matrix4 lookat = Matrix4.LookAt(10, 10, 10, 0, 0, 0, 0, 1, 0);
-            GL.MatrixMode(MatrixMode.Modelview);
-            GL.LoadIdentity();
+            //camera.doCamera();
 
-            camera.doCamera();
+            thirdPersonCamera.doCameraOnPlayer(player1);
+
             myMap.Render();
 
             player1.drawPlayer();

@@ -21,7 +21,9 @@ namespace Tron
         private char[,] mapObstacles; // mapa carregado do txt tá aqui. 
         private int sizeX;
         private int sizeY;
-      
+
+        public uint texturaChao;
+
         public Mapa()
         {
             
@@ -32,12 +34,22 @@ namespace Tron
         {
             GL.PushAttrib(AttribMask.AllAttribBits);
 
+            GL.BindTexture(TextureTarget.Texture2D, texturaChao);
+
             //chão
             GL.Begin(BeginMode.Quads);
-            GL.Color3(0.5f, 0.0f, 0.5f);
+            GL.Color3(0.0f, 0.0f, 0.5f);
+
+            GL.TexCoord2(0.0f, 0.0f);
             GL.Vertex3(0.0f, 0.0f, 0.0f);
+
+            GL.TexCoord2(1.0f, 0.0f);
             GL.Vertex3(0.0f, 0.0f, (float)sizeY * MAP_UNIT_SIZE);
+
+            GL.TexCoord2(1.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 0.0f, (float)sizeY * MAP_UNIT_SIZE);
+
+            GL.TexCoord2(0.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 0.0f, 0.0f);
             GL.End();
 
@@ -80,6 +92,7 @@ namespace Tron
 
             */
 
+            GL.BindTexture(TextureTarget.Texture2D, 0);
             RenderObstacles();
 
             GL.PopAttrib();

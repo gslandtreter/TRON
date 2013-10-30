@@ -45,7 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Camera.cs" />
+    <Compile Include="ThirdPersonCamera.cs" />
+    <Compile Include="DebugCamera.cs" />
     <Compile Include="Mapa.cs" />
     <Compile Include="Mesh.cs" />
     <Compile Include="ObjLoader.cs" />

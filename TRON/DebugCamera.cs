@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace TRON
 {
-    class Camera
+    class DebugCamera
     {
         private Matrix4 cameraMatrix;
 
@@ -93,13 +93,16 @@ namespace TRON
 
         public void doCamera()
         {
+            GL.MatrixMode(MatrixMode.Modelview);
+            GL.LoadIdentity();
+
             GL.Rotate(camAngle.X, 1, 0, 0);
             GL.Rotate(camAngle.Y, 0, 1, 0);
             GL.Translate(camCoord.X, camCoord.Y, camCoord.Z);
         }
 
         public 
-        Camera()
+        DebugCamera()
         {
 
         }
