@@ -1,0 +1,38 @@
+D:\Projetos\FCG\TRON\TRON\bin\Debug\TRON.exe.config
+D:\Projetos\FCG\TRON\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+D:\Projetos\FCG\TRON\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+D:\Projetos\FCG\TRON\TRON\bin\Debug\TRON.exe
+D:\Projetos\FCG\TRON\TRON\bin\Debug\TRON.pdb
+D:\Projetos\FCG\TRON\TRON\bin\Debug\OpenTK.dll
+D:\Projetos\FCG\TRON\TRON\bin\Debug\OpenTK.xml
+D:\Projetos\FCG\TRON\TRON\obj\x86\Debug\TRON.exe
+D:\Projetos\FCG\TRON\TRON\obj\x86\Debug\TRON.pdb
+D:\Projetos\FCG\TRON\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo\Desktop\Tron\TRON\bin\Debug\TRON.exe.config
+C:\Users\rodrigo\Desktop\Tron\TRON\obj\x86\Debug\TRON.exe
+C:\Users\rodrigo\Desktop\Tron\TRON\obj\x86\Debug\TRON.pdb
+C:\Users\rodrigo\Desktop\Tron\TRON\bin\Debug\TRON.exe
+C:\Users\rodrigo\Desktop\Tron\TRON\bin\Debug\TRON.pdb
+C:\Users\rodrigo\Desktop\Tron\TRON\bin\Debug\OpenTK.xml
+C:\Users\rodrigo\Desktop\Tron\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo\Desktop\Tron\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+C:\Users\rodrigo\Desktop\Tron\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+C:\Users\rodrigo\Desktop\Tron 2\TRON\bin\Debug\TRON.exe.config
+C:\Users\rodrigo\Desktop\Tron 2\TRON\obj\x86\Debug\TRON.exe
+C:\Users\rodrigo\Desktop\Tron 2\TRON\obj\x86\Debug\TRON.pdb
+C:\Users\rodrigo\Desktop\Tron 2\TRON\bin\Debug\TRON.exe
+C:\Users\rodrigo\Desktop\Tron 2\TRON\bin\Debug\TRON.pdb
+C:\Users\rodrigo\Desktop\Tron 2\TRON\bin\Debug\OpenTK.xml
+C:\Users\rodrigo\Desktop\Tron 2\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo\Desktop\Tron 2\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+C:\Users\rodrigo\Desktop\Tron 2\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\bin\Debug\TRON.exe.config
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.exe
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.pdb
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\bin\Debug\TRON.exe
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\bin\Debug\TRON.pdb
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\bin\Debug\OpenTK.dll
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\bin\Debug\OpenTK.xml
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+D:\Gustavo\Dropbox\FCG Trab Final\Tron 2\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
