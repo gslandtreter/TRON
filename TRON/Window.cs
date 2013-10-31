@@ -38,8 +38,8 @@ namespace TRON
 
             myMap = new Mapa();
             thirdPersonCamera = new ThirdPersonCamera();
-            player1 = new Player();
-            player2 = new Player();
+            player1 = new Player(new Vector3(10, 0, 10), Color.BlueViolet);
+            player2 = new Player(new Vector3(15, 0, 10), Color.Crimson);
 
             GL.ClearColor(Color.Black);
             GL.Enable(EnableCap.DepthTest);
@@ -62,9 +62,6 @@ namespace TRON
                 player1.mesh = cycle;
                 player2.mesh = cycle;
             }
-
-            player1.position = new Vector3(10, 0, 10);
-            player2.position = new Vector3(15, 0, 10);
 
             player2.speed = 12;
 
@@ -130,6 +127,9 @@ namespace TRON
 
             player1.drawPlayer();
             player2.drawPlayer();
+
+            player1.drawTrail();
+            player2.drawTrail();
 
             this.SwapBuffers();
         }

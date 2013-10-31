@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using OpenTK;
 using OpenTK.Graphics.OpenGL;
-
+using System.Drawing;
 
 namespace TRON
 {
@@ -27,9 +27,28 @@ namespace TRON
 
         public double inputTimeBuffer;
 
-        public Player()
+        public bool directionChanged;
+
+        public TrailSector currentTrail;
+        public List<TrailSector> trailHistory;
+
+        public Color color;
+
+        public Player(Vector3 beginningPos, Color playerColor)
         {
+            color = playerColor;
             speed = 10.0f;
+            direction = PlayerDirection.UP;
+
+            trailHistory = new List<TrailSector>();
+            currentTrail = new TrailSector(direction, color);
+
+            directionChanged = false;
+
+            position = beginningPos;
+
+            currentTrail.beginningPoint = beginningPos;
+
         }
 
         public void drawPlayer()
@@ -44,6 +63,16 @@ namespace TRON
             mesh.Render(textureID);
 
             GL.PopMatrix();
+        }
+
+        public void drawTrail()
+        {
+            currentTrail.Draw();
+
+            foreach (TrailSector sector in trailHistory)
+            {
+                sector.Draw();
+            }
         }
 
         private void rotateByDirection()
@@ -91,6 +120,8 @@ namespace TRON
                         direction = PlayerDirection.UP;
                         break;
                 }
+
+                directionChanged = true;
             }
             else if (keyboard[OpenTK.Input.Key.Right])
             {
@@ -113,7 +144,15 @@ namespace TRON
                         direction = PlayerDirection.DOWN;
                         break;
                 }
+
+                directionChanged = true;
             }
+        }
+
+        public void setPosition(Vector3 newPos)
+        {
+            position = newPos;
+            currentTrail.endPoint = newPos;
         }
 
         public void updatePlayerPos(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
@@ -121,22 +160,41 @@ namespace TRON
 
             getNewDirection(keyboard, elapsedTime);
 
+            if (directionChanged)
+            {
+                createNewTrail();
+                directionChanged = false;
+            }
+
             switch (direction)
             {
                 case PlayerDirection.UP:
                     position.X += speed * elapsedTime;
+                    setPosition(position);
                     break;
                 case PlayerDirection.LEFT:
                     position.Z -= speed * elapsedTime;
+                    setPosition(position);
                     break;
                 case PlayerDirection.DOWN:
                     position.X -= speed * elapsedTime;
+                    setPosition(position);
                     break;
                 case PlayerDirection.RIGHT:
                     position.Z += speed * elapsedTime;
+                    setPosition(position);
                     break;
 
             }
+        }
+
+        public void createNewTrail()
+        {
+            currentTrail.isCurrentTrail = false;
+            trailHistory.Add(currentTrail);
+
+            currentTrail = new TrailSector(direction, color);
+            currentTrail.beginningPoint = currentTrail.endPoint = position;
         }
     }
 }

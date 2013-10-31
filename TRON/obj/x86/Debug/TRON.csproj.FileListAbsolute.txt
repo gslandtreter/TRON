@@ -46,3 +46,13 @@ D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\TRON.exe
 D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\TRON.pdb
 D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\OpenTK.dll
 D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\OpenTK.xml
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\bin\Debug\TRON.exe.config
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\TRON.exe
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\TRON.pdb
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\bin\Debug\TRON.exe
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\bin\Debug\TRON.pdb
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\bin\Debug\OpenTK.xml
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\ResGen.read.1.tlog
+C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\ResGen.write.1.tlog
