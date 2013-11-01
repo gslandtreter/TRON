@@ -22,8 +22,11 @@ namespace TRON
         Mapa myMap;
         //DebugCamera camera;
         ThirdPersonCamera thirdPersonCamera;
+        TopCamera topCamera;
         Player player1;
         Player player2;
+
+        bool cameraMode = false;
 
         public TRONWindow()
             : base(800, 600, new GraphicsMode(16, 16), "TRON")
@@ -38,6 +41,7 @@ namespace TRON
 
             myMap = new Mapa();
             thirdPersonCamera = new ThirdPersonCamera();
+            topCamera = new TopCamera();
             player1 = new Player(new Vector3(10, 0, 10), Color.BlueViolet);
             player2 = new Player(new Vector3(15, 0, 10), Color.Crimson);
 
@@ -47,7 +51,11 @@ namespace TRON
             GL.EnableClientState(ArrayCap.VertexArray);
             GL.EnableClientState(ArrayCap.NormalArray);
             GL.EnableClientState(ArrayCap.TextureCoordArray);
-           
+
+            GL.Enable(EnableCap.Blend);
+            GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
+
+
             cycle = ObjLoader.LoadFile("TronBike.obj");
 
             if (cycle != null)
@@ -113,15 +121,27 @@ namespace TRON
 
         }
 
+        protected override void OnKeyPress(OpenTK.KeyPressEventArgs e)
+        {
+            base.OnKeyPress(e);
+
+            if (Keyboard[OpenTK.Input.Key.V])
+            {
+                cameraMode = !cameraMode;
+            }
+        }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
 
+
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 
-            //camera.doCamera();
-
-            thirdPersonCamera.doCameraOnPlayer(player1);
+            if(cameraMode)
+                topCamera.doCamera(myMap.sizeX * Mapa.MAP_UNIT_SIZE, myMap.sizeY * Mapa.MAP_UNIT_SIZE);
+            else
+                thirdPersonCamera.doCameraOnPlayer(player1);
+            
 
             myMap.Render();
 

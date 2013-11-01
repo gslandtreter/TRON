@@ -19,8 +19,8 @@ namespace Tron
         public static int MAP_UNIT_SIZE = 5;
 
         private char[,] mapObstacles; // mapa carregado do txt tá aqui. 
-        private int sizeX;
-        private int sizeY;
+        public int sizeX;
+        public int sizeY;
 
         public uint texturaChao;
 

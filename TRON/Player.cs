@@ -95,7 +95,7 @@ namespace TRON
             }
         }
 
-        private void getNewDirection(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
+        public void getNewDirection(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
         {
             inputTimeBuffer += elapsedTime;
 

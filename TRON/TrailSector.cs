@@ -215,7 +215,7 @@ namespace TRON
 
             GL.BindTexture(TextureTarget.Texture2D, 0); //TODO: add Texture
 
-            GL.Color3(color);
+            GL.Color4(color.R, color.G, color.B, (byte) 170);
 
             if (isCurrentTrail)
                 DrawLength(BIKE_LENGTH);
