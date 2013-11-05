@@ -53,10 +53,10 @@ namespace TRON
             GL.EnableClientState(ArrayCap.VertexArray);
             GL.EnableClientState(ArrayCap.NormalArray);
             GL.EnableClientState(ArrayCap.TextureCoordArray);
-
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-
+            //GL.Enable(EnableCap.Lighting);
+            
 
             cycle = ObjLoader.LoadFile("TronBike.obj");
 
@@ -66,7 +66,8 @@ namespace TRON
                 player2.textureID = cycle.LoadTexture("Textures//bike red.png"); //TODO: Wrap to texture loader
 
                 myMap.texturaChao = Texture.LoadTex("Textures//grid.jpg");
-
+                myMap.texturaParede = Texture.LoadTex("Textures//wall2.jpg");
+                myMap.texturaObstaculo = Texture.LoadTex("Textures//Obstaculo.jpg");
                 cycle.LoadBuffers();
 
                 player1.mesh = cycle;
@@ -172,7 +173,6 @@ namespace TRON
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
-
 
             GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
 

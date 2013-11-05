@@ -23,7 +23,8 @@ namespace TRON
         public int sizeY;
 
         public uint texturaChao;
-
+        public uint texturaParede;
+        public uint texturaObstaculo;
         public Mapa()
         {
             
@@ -38,7 +39,8 @@ namespace TRON
 
             //chão
             GL.Begin(BeginMode.Quads);
-            GL.Color3(0.0f, 0.0f, 0.5f);
+            GL.Normal3(0, 1, 0);
+            GL.Color3(0.9f, 0.9f, 0.0f);
 
             GL.TexCoord2(0.0f, 0.0f);
             GL.Vertex3(0.0f, 0.0f, 0.0f);
@@ -53,50 +55,89 @@ namespace TRON
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 0.0f, 0.0f);
             GL.End();
 
-            /*
+
+            GL.PopAttrib();
+
+            GL.PushAttrib(AttribMask.AllAttribBits);
+
+            GL.BindTexture(TextureTarget.Texture2D, texturaParede);
+
+            
             //esquerda
             GL.Begin(BeginMode.Quads);
-            GL.Color3(1.0f, 0.0f, 0.0f);
+            GL.Normal3(1, 0, 0);
+            //GL.Color3(1.0f, 0.0f, 0.0f);
+
+            GL.TexCoord2(0.0f, 0.0f);
             GL.Vertex3(0.0f ,0.0f, 0.0f);
+           
+            GL.TexCoord2(0.0f, 1.0f);
             GL.Vertex3(0.0f, 0.0f, (float)sizeY * MAP_UNIT_SIZE);
+            
+            GL.TexCoord2(1.0f, 1.0f);
             GL.Vertex3(0.0f, 3.0f, (float)sizeY * MAP_UNIT_SIZE);
+            
+            GL.TexCoord2(1.0f, 0.0f);
             GL.Vertex3(0.0f, 3.0f, 0.0f);
             GL.End();
 
             //direita
             GL.Begin(BeginMode.Quads);
-            GL.Color3(0.0f, 1.0f, 0.0f); 
+            GL.Normal3(-1, 0, 0);
+            //GL.Color3(0.0f, 1.0f, 0.0f);
+            
+            GL.TexCoord2(0.0f, 0.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX , 0.0f, 0.0f);
+            
+            GL.TexCoord2(0.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 0.0f, (float)sizeY * MAP_UNIT_SIZE);
+            
+            GL.TexCoord2(1.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 3.0f, (float)sizeY * MAP_UNIT_SIZE);
+            
+            GL.TexCoord2(1.0f, 0.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 3.0f, 0.0f);
             GL.End();
 
             //fundo 
             GL.Begin(BeginMode.Quads);
-            GL.Color3(0.0f, 0.0f, 1.0f); 
+            GL.Normal3(0, 0, 1);
+            //GL.Color3(0.0f, 0.0f, 1.0f); 
+            
+            GL.TexCoord2(0.0f, 0.0f);
             GL.Vertex3(0.0f, 0.0f, (float)sizeY * MAP_UNIT_SIZE);
+
+            GL.TexCoord2(0.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 0.0f, (float)sizeY * MAP_UNIT_SIZE);
+            
+            GL.TexCoord2(1.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 3.0f, (float)sizeY * MAP_UNIT_SIZE);
+            
+            GL.TexCoord2(1.0f, 0.0f);
             GL.Vertex3(0.0f, 3.0f, (float)sizeY * MAP_UNIT_SIZE);
             GL.End();
 
             //frente
             GL.Begin(BeginMode.Quads);
-            GL.Color3(1.0f, 0.0f, 1.0f);
+            GL.Normal3(0, 0, -1);
+            //GL.Color3(0.0f, 0.0f, 1.0f);
+            GL.TexCoord2(0.0f, 0.0f);
             GL.Vertex3(0.0f, 0.0f, 0.0f);
+            
+            GL.TexCoord2(0.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 0.0f, 0.0f);
+            
+            GL.TexCoord2(1.0f, 1.0f);
             GL.Vertex3(MAP_UNIT_SIZE * (float)sizeX, 3.0f, 0.0f);
+            
+            GL.TexCoord2(1.0f, 0.0f);
             GL.Vertex3(0.0f, 3.0f, 0.0f);
             GL.End();
-
-            */
-
-            GL.BindTexture(TextureTarget.Texture2D, 0);
+        
             RenderObstacles();
-
             GL.PopAttrib();
-        }
+
+         }
 
 
         private void RenderObstacles()
@@ -106,50 +147,105 @@ namespace TRON
                 {
                     if (mapObstacles[i,j] == '1')
                     {
+                        GL.PushAttrib(AttribMask.AllAttribBits);
+
+                        GL.BindTexture(TextureTarget.Texture2D, texturaObstaculo);
+
                         //teto
                         GL.Begin(BeginMode.Quads);
-                        GL.Color3(1.0f, 1.0f, 0.0f); 
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f,     (float)i * MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE +MAP_UNIT_SIZE);
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f,     (float)i * MAP_UNIT_SIZE +MAP_UNIT_SIZE );
-                        GL.End();
+                       // GL.Color3(1.0f, 1.0f, 0.0f); 
+                        GL.Normal3(0, 1, 0);
+
+                        GL.TexCoord2(0.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE);
                         
+                        GL.TexCoord2(0.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.End();
+
                         //direita
                         GL.Begin(BeginMode.Quads);
-                        GL.Color3(1.0f, 0.0f, 0.0f); 
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE );
+                        //GL.Color3(1.0f, 1.0f, 0.0f); 
+                        GL.Normal3(1, 0, 0);
+            
+                        GL.TexCoord2(0.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(0.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 1.0f);
                         GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 0.0f);
                         GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
                         GL.End();
                         
                         //atras
                         GL.Begin(BeginMode.Quads);
-                        GL.Color3(1.0f, 1.0f, 1.0f); 
+                        //GL.Color3(1.0f, 0.0f, 0.0f);
+                        GL.Normal3(0, 0, +1);
+            
+                        GL.TexCoord2(0.0f, 0.0f);
                         GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE );
+                        
+                        GL.TexCoord2(1.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(0.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
                         GL.End();
                         
                         //frente
                         GL.Begin(BeginMode.Quads);
-                        GL.Color3(1.0f, 1.0f, 0.0f); 
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE );
+                        //GL.Color3(0.0f, 0.0f, 1.0f);
+                        GL.Normal3(0, 0, -1);
+            
+                        GL.TexCoord2(0.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 0.0f);
                         GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 1.0f);
                         GL.Vertex3(0.0f + j * MAP_UNIT_SIZE + MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE);
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE );
+                        
+                        GL.TexCoord2(0.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE);
                         GL.End();
                         
                         //esquerda
                         GL.Begin(BeginMode.Quads);
-                        GL.Color3(0.0f, 1.0f, 0.0f); 
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE );
-                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE );
+                        //GL.Color3(0.0f, 1.0f, 0.0f); 
+                        GL.Normal3(-1, 0, 0);
+            
+                        GL.TexCoord2(0.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 0.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 0.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(1.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE + MAP_UNIT_SIZE);
+                        
+                        GL.TexCoord2(0.0f, 1.0f);
+                        GL.Vertex3(0.0f + j * MAP_UNIT_SIZE, 3.0f, (float)i * MAP_UNIT_SIZE);
                         GL.End();
+
+                        GL.PopAttrib();
+
+                        
                     }
                 }
         }
