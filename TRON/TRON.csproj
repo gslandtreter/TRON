@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollisionManager.cs" />
     <Compile Include="ThirdPersonCamera.cs" />
     <Compile Include="DebugCamera.cs" />
     <Compile Include="Mapa.cs" />

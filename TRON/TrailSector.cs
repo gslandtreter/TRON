@@ -16,10 +16,13 @@ namespace TRON
         public static float TRAIL_HEIGHT = 1.5f;
         public static float TRAIL_DEPTH = 0.5f;
         public static float BIKE_LENGTH = 3.5f;
+        public static float COLLISION_THRESHOLD = 0.0f;
+        public static byte TRAIL_OPACITY = 170;
 
         public PlayerDirection direction;
 
         public bool isCurrentTrail;
+        public bool isFirstOnHistory = false;
         public Vector3 beginningPoint;
         public Vector3 endPoint;
 
@@ -215,7 +218,7 @@ namespace TRON
 
             GL.BindTexture(TextureTarget.Texture2D, 0); //TODO: add Texture
 
-            GL.Color4(color.R, color.G, color.B, (byte) 170);
+            GL.Color4(color.R, color.G, color.B, TRAIL_OPACITY);
 
             if (isCurrentTrail)
                 DrawLength(BIKE_LENGTH);

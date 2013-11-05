@@ -8,7 +8,6 @@ using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using Tron;
 
 
 namespace TRON
@@ -26,6 +25,7 @@ namespace TRON
         Player player1;
         Player player2;
 
+        List<Player> gamePlayers;
         bool cameraMode = false;
 
         public TRONWindow()
@@ -42,8 +42,10 @@ namespace TRON
             myMap = new Mapa();
             thirdPersonCamera = new ThirdPersonCamera();
             topCamera = new TopCamera();
+
+            gamePlayers = new List<Player>();
             player1 = new Player(new Vector3(10, 0, 10), Color.BlueViolet);
-            player2 = new Player(new Vector3(15, 0, 10), Color.Crimson);
+            player2 = new Player(new Vector3(15, 0, 15), Color.Crimson);
 
             GL.ClearColor(Color.Black);
             GL.Enable(EnableCap.DepthTest);
@@ -71,9 +73,13 @@ namespace TRON
                 player2.mesh = cycle;
             }
 
+            player1.isHumanPlayer = true;
             player2.speed = 12;
 
             myMap.loadMap("map.txt");
+
+            gamePlayers.Add(player1);
+            gamePlayers.Add(player2);
         }
 
         /// <summary>
@@ -114,8 +120,41 @@ namespace TRON
                 return;
             }
 
-            player1.updatePlayerPos(Keyboard, e.Time);
-            player2.updatePlayerPos(Keyboard, e.Time);
+            foreach (Player player in gamePlayers)
+            {
+                if (!player.isAlive)
+                    continue;
+
+                player.updatePlayerPos(Keyboard, e.Time);
+
+                if (CollisionManager.CollideWithMap(player, myMap.mapObstacles))
+                {
+                    player.Die();
+                }
+
+                foreach (Player collisionTestPlayer in gamePlayers)
+                {
+                    if (!collisionTestPlayer.isAlive)
+                        continue;
+
+                    if (player != collisionTestPlayer && CollisionManager.CollideWithTrail(player, collisionTestPlayer.currentTrail))
+                    {
+                        player.Die();
+                    }
+
+                    foreach (TrailSector trailSector in collisionTestPlayer.trailHistory)
+                    {
+                        if (collisionTestPlayer == player && trailSector.isFirstOnHistory)
+                            continue;
+
+                        if (CollisionManager.CollideWithTrail(player, trailSector))
+                        {
+                            player.Die();
+                        }
+                    }
+                }
+
+            }
 
             //camera.updateCamera(Keyboard, Mouse);
 
@@ -140,16 +179,19 @@ namespace TRON
             if(cameraMode)
                 topCamera.doCamera(myMap.sizeX * Mapa.MAP_UNIT_SIZE, myMap.sizeY * Mapa.MAP_UNIT_SIZE);
             else
-                thirdPersonCamera.doCameraOnPlayer(player1);
+                thirdPersonCamera.doCameraOnPlayer(gamePlayers.Find(i => i.isHumanPlayer));
             
 
             myMap.Render();
 
-            player1.drawPlayer();
-            player2.drawPlayer();
+            foreach (Player player in gamePlayers)
+            {
+                if (!player.isAlive)
+                    continue;
 
-            player1.drawTrail();
-            player2.drawTrail();
+                player.drawPlayer();
+                player.drawTrail();
+            }
 
             this.SwapBuffers();
         }

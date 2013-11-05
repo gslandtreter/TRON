@@ -21,6 +21,8 @@ namespace TRON
         public Vector3 position;
         public PlayerDirection direction;
         public float speed;
+        public bool isHumanPlayer;
+        public bool isAlive;
 
         public Mesh mesh;
         public uint textureID;
@@ -39,6 +41,8 @@ namespace TRON
             color = playerColor;
             speed = 10.0f;
             direction = PlayerDirection.UP;
+            isHumanPlayer = false;
+            isAlive = true;
 
             trailHistory = new List<TrailSector>();
             currentTrail = new TrailSector(direction, color);
@@ -63,6 +67,7 @@ namespace TRON
             mesh.Render(textureID);
 
             GL.PopMatrix();
+           
         }
 
         public void drawTrail()
@@ -97,6 +102,7 @@ namespace TRON
 
         public void getNewDirection(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
         {
+            //TODO: O movimento deve ser diferente na camera de cima. Ver definicao do trabalho.
             inputTimeBuffer += elapsedTime;
 
             if (keyboard[OpenTK.Input.Key.Left])
@@ -155,6 +161,15 @@ namespace TRON
             currentTrail.endPoint = newPos;
         }
 
+        public void Die()
+        {
+            //TODO: die properly
+            this.trailHistory = new List<TrailSector>();
+            this.setPosition(new Vector3(10, 0, 10));
+
+            this.isAlive = false;
+        }
+
         public void updatePlayerPos(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
         {
 
@@ -191,6 +206,13 @@ namespace TRON
         public void createNewTrail()
         {
             currentTrail.isCurrentTrail = false;
+            currentTrail.isFirstOnHistory = true;
+
+            TrailSector firstOnHistory = trailHistory.Find(i => i.isFirstOnHistory);
+
+            if (firstOnHistory != null)
+                firstOnHistory.isFirstOnHistory = false;
+
             trailHistory.Add(currentTrail);
 
             currentTrail = new TrailSector(direction, color);

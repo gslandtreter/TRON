@@ -10,7 +10,7 @@ using System.IO;
 using System.Drawing;
 using System.Drawing.Imaging;
 
-namespace Tron
+namespace TRON
 {
     
 
@@ -18,7 +18,7 @@ namespace Tron
     {
         public static int MAP_UNIT_SIZE = 5;
 
-        private char[,] mapObstacles; // mapa carregado do txt tá aqui. 
+        public char[,] mapObstacles; // mapa carregado do txt tá aqui. 
         public int sizeX;
         public int sizeY;
 
