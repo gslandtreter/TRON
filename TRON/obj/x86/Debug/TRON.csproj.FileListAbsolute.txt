@@ -56,3 +56,12 @@ C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\ResolveAssem
 C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
 C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\ResGen.read.1.tlog
 C:\Users\aluno\Documents\TRON-master\TRON-master\TRON\obj\x86\Debug\ResGen.write.1.tlog
+C:\Users\rodrigo\Desktop\TRON-master\TRON\bin\Debug\TRON.exe.config
+C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.exe
+C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.pdb
+C:\Users\rodrigo\Desktop\TRON-master\TRON\bin\Debug\TRON.exe
+C:\Users\rodrigo\Desktop\TRON-master\TRON\bin\Debug\TRON.pdb
+C:\Users\rodrigo\Desktop\TRON-master\TRON\bin\Debug\OpenTK.xml
+C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache

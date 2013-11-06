@@ -39,28 +39,45 @@ namespace TRON
         public Rectangle hitBox;
 
 
-        
-
-        public Player(Vector3 beginningPos, Color playerColor)
+        public Player(char[,] mapObstacles, Color playerColor)
         {
             color = playerColor;
             speed = 10.0f;
             direction = PlayerDirection.UP;
             isHumanPlayer = false;
-            isAlive = true;
-
+            isAlive = true;         
+          
             trailHistory = new List<TrailSector>();
+            
             currentTrail = new TrailSector(direction, color);
-
+            SetBegginingPos(mapObstacles);
+            //SetDirection(mapObstacles);
+            
             directionChanged = false;
 
-            position = beginningPos;
-
-            currentTrail.beginningPoint = beginningPos;
-
-
+            
 
         }
+        
+        private void SetBegginingPos(char[,] mapObstacles)
+        {
+            for (int i = 0; i < mapObstacles.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapObstacles.GetLength(1); j++)
+                {
+                    if (mapObstacles[i, j] == '2')
+                    {
+                        this.position = new Vector3(j * Mapa.MAP_UNIT_SIZE, 0, i * Mapa.MAP_UNIT_SIZE);
+                        currentTrail.beginningPoint = new Vector3(j * Mapa.MAP_UNIT_SIZE, 0, i * Mapa.MAP_UNIT_SIZE);
+                        mapObstacles[i, j] = '0';
+                        return;
+                    }
+                }
+            }
+        }
+
+
+
 
         public void drawPlayer()
         {

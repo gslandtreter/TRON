@@ -46,12 +46,14 @@ namespace TRON
             base.OnLoad(e);
 
             myMap = new Mapa();
+            myMap.loadMap("map.txt");
+
             thirdPersonCamera = new ThirdPersonCamera();
             topCamera = new TopCamera();
-
+            
             gamePlayers = new List<Player>();
-            player1 = new Player(new Vector3(10, 0, 10), Color.BlueViolet);
-            player2 = new Player(new Vector3(15, 0, 15), Color.Crimson);
+            player1 = new Player(myMap.mapObstacles, Color.BlueViolet);
+            player2 = new Player(myMap.mapObstacles, Color.Crimson);
 
             GL.ClearColor(Color.Black);
             GL.Enable(EnableCap.DepthTest);
@@ -93,8 +95,7 @@ namespace TRON
             player1.isHumanPlayer = true;
             player2.speed = 12;
 
-            myMap.loadMap("map.txt");
-
+            
             gamePlayers.Add(player1);
             gamePlayers.Add(player2);
         }
