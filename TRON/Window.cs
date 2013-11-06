@@ -28,6 +28,12 @@ namespace TRON
         List<Player> gamePlayers;
         bool cameraMode = false;
 
+
+        float[] ambientLight = { 0.2f, 0.2f, 0.8f };
+        float[] diffuseLight = { 0.8f, 0.8f, 0.8f };
+        float[] specularLight = { 0.5f, 0.5f, 0.8f };
+        float[] position = { 15, 15, 15 };
+
         public TRONWindow()
             : base(800, 600, new GraphicsMode(16, 16), "TRON")
         {
@@ -55,8 +61,18 @@ namespace TRON
             GL.EnableClientState(ArrayCap.TextureCoordArray);
             GL.Enable(EnableCap.Blend);
             GL.BlendFunc(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.OneMinusSrcAlpha);
-            //GL.Enable(EnableCap.Lighting);
-            
+            GL.Enable(EnableCap.Normalize);
+
+            GL.Enable(EnableCap.ColorMaterial);
+            GL.Enable(EnableCap.Lighting);
+            GL.Enable(EnableCap.Light0);
+
+            GL.Light(LightName.Light0, LightParameter.Position, position);
+            GL.Light(LightName.Light0, LightParameter.Diffuse, diffuseLight);
+            GL.Light(LightName.Light0, LightParameter.Ambient, ambientLight);
+            GL.Light(LightName.Light0, LightParameter.Specular, specularLight);
+
+
 
             cycle = ObjLoader.LoadFile("TronBike.obj");
 
@@ -143,6 +159,12 @@ namespace TRON
                         player.Die();
                     }
 
+                    if (player != collisionTestPlayer && player.hitBox.CollideWithRectancle(collisionTestPlayer.hitBox))
+                    {
+                        player.Die();
+                        collisionTestPlayer.Die();
+                    }
+
                     foreach (TrailSector trailSector in collisionTestPlayer.trailHistory)
                     {
                         if (collisionTestPlayer == player && trailSector.isFirstOnHistory)
@@ -157,8 +179,6 @@ namespace TRON
 
             }
 
-            //camera.updateCamera(Keyboard, Mouse);
-
         }
 
         protected override void OnKeyPress(OpenTK.KeyPressEventArgs e)
@@ -170,6 +190,7 @@ namespace TRON
                 cameraMode = !cameraMode;
             }
         }
+
         protected override void OnRenderFrame(FrameEventArgs e)
         {
             base.OnRenderFrame(e);
@@ -180,9 +201,6 @@ namespace TRON
                 topCamera.doCamera(myMap.sizeX * Mapa.MAP_UNIT_SIZE, myMap.sizeY * Mapa.MAP_UNIT_SIZE);
             else
                 thirdPersonCamera.doCameraOnPlayer(gamePlayers.Find(i => i.isHumanPlayer));
-            
-
-            myMap.Render();
 
             foreach (Player player in gamePlayers)
             {
@@ -192,6 +210,41 @@ namespace TRON
                 player.drawPlayer();
                 player.drawTrail();
             }
+
+            
+            //REFLECTION
+
+            GL.Enable(EnableCap.StencilTest);
+            GL.ColorMask(false, false, false, false);
+            GL.Disable(EnableCap.DepthTest);
+            GL.StencilFunc(StencilFunction.Always, 1, 1);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Replace);
+            myMap.RenderFloor(1.0f);
+
+            GL.ColorMask(true, true, true, true);
+            GL.Enable(EnableCap.DepthTest);
+            GL.StencilFunc(StencilFunction.Equal, 1, 1);
+            GL.StencilOp(StencilOp.Keep, StencilOp.Keep, StencilOp.Keep);
+
+            GL.PushMatrix();
+
+            GL.Scale(1, -1, 1);
+            myMap.RenderWalls();
+
+            foreach (Player player in gamePlayers)
+            {
+                if (!player.isAlive)
+                    continue;
+
+                player.drawPlayer();
+                player.drawTrail();
+            }
+
+            GL.PopMatrix();
+            GL.Disable(EnableCap.StencilTest);
+            //ENDOF Reflection
+       
+            myMap.Render();
 
             this.SwapBuffers();
         }

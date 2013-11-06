@@ -42,6 +42,7 @@ namespace TRON
                 case PlayerDirection.UP:
                     //Inicio
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(-1, 0, 0);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(beginningPoint.X, TRAIL_HEIGHT, beginningPoint.Z + TRAIL_DEPTH / 2);
@@ -49,7 +50,9 @@ namespace TRON
                     GL.End();
 
                     //Fim
+                    
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(1, 0, 0);
                     GL.Vertex3(endPoint.X - lengthToIgnore, 0, endPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, 0, endPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, TRAIL_HEIGHT, endPoint.Z + TRAIL_DEPTH / 2);
@@ -58,6 +61,7 @@ namespace TRON
 
                     //Teto 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 1, 0);
                     GL.Vertex3(beginningPoint.X, TRAIL_HEIGHT, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(beginningPoint.X, TRAIL_HEIGHT, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, TRAIL_HEIGHT, endPoint.Z + TRAIL_DEPTH / 2);
@@ -66,6 +70,7 @@ namespace TRON
 
                     //Paredes laterais
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, -1);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, 0, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, TRAIL_HEIGHT, beginningPoint.Z - TRAIL_DEPTH / 2);
@@ -73,6 +78,7 @@ namespace TRON
                     GL.End();
 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, 1);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, 0, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X - lengthToIgnore, TRAIL_HEIGHT, beginningPoint.Z + TRAIL_DEPTH / 2);
@@ -85,6 +91,7 @@ namespace TRON
 
                     //Inicio
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(1, 0, 0);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(beginningPoint.X, TRAIL_HEIGHT, beginningPoint.Z + TRAIL_DEPTH / 2);
@@ -93,6 +100,7 @@ namespace TRON
 
                     //Fim
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(-1, 0, 0);
                     GL.Vertex3(endPoint.X + lengthToIgnore, 0, endPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, 0, endPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, TRAIL_HEIGHT, endPoint.Z + TRAIL_DEPTH / 2);
@@ -101,6 +109,7 @@ namespace TRON
 
                     //Teto 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 1, 0);
                     GL.Vertex3(beginningPoint.X, TRAIL_HEIGHT, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(beginningPoint.X, TRAIL_HEIGHT, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, TRAIL_HEIGHT, endPoint.Z + TRAIL_DEPTH / 2);
@@ -109,6 +118,7 @@ namespace TRON
 
                     //Paredes laterais
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, -1);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, 0, beginningPoint.Z - TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, TRAIL_HEIGHT, beginningPoint.Z - TRAIL_DEPTH / 2);
@@ -116,6 +126,7 @@ namespace TRON
                     GL.End();
 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, 1);
                     GL.Vertex3(beginningPoint.X, 0, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, 0, beginningPoint.Z + TRAIL_DEPTH / 2);
                     GL.Vertex3(endPoint.X + lengthToIgnore, TRAIL_HEIGHT, beginningPoint.Z + TRAIL_DEPTH / 2);
@@ -128,6 +139,7 @@ namespace TRON
 
                     //Inicio
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, -1);
                     GL.Vertex3(beginningPoint.X - TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, beginningPoint.Z);
@@ -136,6 +148,7 @@ namespace TRON
 
                     //Fim
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, 1);
                     GL.Vertex3(endPoint.X - TRAIL_DEPTH / 2, 0, endPoint.Z - lengthToIgnore);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, 0, endPoint.Z - lengthToIgnore);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z - lengthToIgnore);
@@ -144,6 +157,7 @@ namespace TRON
 
                     //Teto 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 1, 0);
                     GL.Vertex3(beginningPoint.X - TRAIL_DEPTH / 2, TRAIL_HEIGHT, beginningPoint.Z);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, beginningPoint.Z);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z - lengthToIgnore);
@@ -152,6 +166,7 @@ namespace TRON
 
                     //Paredes laterais
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(-1, 0, 0);
                     GL.Vertex3(beginningPoint.X - TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(endPoint.X - TRAIL_DEPTH / 2, 0, endPoint.Z - lengthToIgnore);
                     GL.Vertex3(endPoint.X - TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z - lengthToIgnore);
@@ -159,6 +174,7 @@ namespace TRON
                     GL.End();
 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(1, 0, 0);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, 0, endPoint.Z - lengthToIgnore);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z - lengthToIgnore);
@@ -171,6 +187,7 @@ namespace TRON
 
                     //Inicio
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, 1);
                     GL.Vertex3(beginningPoint.X - TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, beginningPoint.Z);
@@ -179,6 +196,7 @@ namespace TRON
 
                     //Fim
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 0, -1);
                     GL.Vertex3(endPoint.X - TRAIL_DEPTH / 2, 0, endPoint.Z + lengthToIgnore);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, 0, endPoint.Z + lengthToIgnore);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z + lengthToIgnore);
@@ -187,6 +205,7 @@ namespace TRON
 
                     //Teto 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(0, 1, 0);
                     GL.Vertex3(beginningPoint.X - TRAIL_DEPTH / 2, TRAIL_HEIGHT, beginningPoint.Z);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, beginningPoint.Z);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z + lengthToIgnore);
@@ -195,6 +214,7 @@ namespace TRON
 
                     //Paredes laterais
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(-1, 0, 0);
                     GL.Vertex3(beginningPoint.X - TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(endPoint.X - TRAIL_DEPTH / 2, 0, endPoint.Z + lengthToIgnore);
                     GL.Vertex3(endPoint.X - TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z + lengthToIgnore);
@@ -202,6 +222,7 @@ namespace TRON
                     GL.End();
 
                     GL.Begin(BeginMode.Quads);
+                    GL.Normal3(1, 0, 0);
                     GL.Vertex3(beginningPoint.X + TRAIL_DEPTH / 2, 0, beginningPoint.Z);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, 0, endPoint.Z + lengthToIgnore);
                     GL.Vertex3(endPoint.X + TRAIL_DEPTH / 2, TRAIL_HEIGHT, endPoint.Z + lengthToIgnore);

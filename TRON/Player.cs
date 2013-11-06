@@ -36,6 +36,11 @@ namespace TRON
 
         public Color color;
 
+        public Rectangle hitBox;
+
+
+        
+
         public Player(Vector3 beginningPos, Color playerColor)
         {
             color = playerColor;
@@ -52,6 +57,8 @@ namespace TRON
             position = beginningPos;
 
             currentTrail.beginningPoint = beginningPos;
+
+
 
         }
 
@@ -159,6 +166,8 @@ namespace TRON
         {
             position = newPos;
             currentTrail.endPoint = newPos;
+
+            hitBox = Rectangle.GetPlayerHitBox(this);
         }
 
         public void Die()
@@ -172,7 +181,6 @@ namespace TRON
 
         public void updatePlayerPos(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
         {
-
             getNewDirection(keyboard, elapsedTime);
 
             if (directionChanged)
