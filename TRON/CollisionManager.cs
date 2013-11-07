@@ -87,6 +87,38 @@ namespace TRON
             return rect;
         }
 
+        public static Rectangle GetHitBox(Vector3 position, PlayerDirection direction)
+        {
+            float xmin = 0, xmax = 0, ymin = 0, ymax = 0;
+
+            switch (direction)
+            {
+                case PlayerDirection.UP:
+                case PlayerDirection.DOWN:
+
+                    xmin = (float)position.X - STATIC_BIKE_LENGTH;
+                    xmax = (float)position.X + STATIC_BIKE_LENGTH;
+
+                    ymin = (float)position.Z - STATIC_BIKE_WIDTH;
+                    ymax = (float)position.Z + STATIC_BIKE_WIDTH;
+
+                    break;
+
+                case PlayerDirection.LEFT:
+                case PlayerDirection.RIGHT:
+
+                    xmin = (float)position.X - STATIC_BIKE_WIDTH;
+                    xmax = (float)position.X + STATIC_BIKE_WIDTH;
+
+                    ymin = (float)position.Z - STATIC_BIKE_LENGTH;
+                    ymax = (float)position.Z + STATIC_BIKE_LENGTH;
+
+                    break;
+            }
+
+            Rectangle rect = new Rectangle(xmin, xmax, ymin, ymax);
+            return rect;
+        }
         
     }
 
@@ -129,6 +161,45 @@ namespace TRON
             return false;
         }
 
+        public static bool CollideWithMap(Vector3 position, PlayerDirection direction, char[,] mapObstacles)
+        {
+
+            Rectangle playerHitBox = Rectangle.GetHitBox(position, direction);
+
+            //External Walls
+            if (Mapa.leftWallHitBox.CollideWithRectancle(playerHitBox) ||
+                Mapa.rightWallHitBox.CollideWithRectancle(playerHitBox) ||
+                Mapa.bottomWallHitBox.CollideWithRectancle(playerHitBox) ||
+                Mapa.topWallHitBox.CollideWithRectancle(playerHitBox))
+                return true;
+
+
+            //Obstacles
+            for (int i = 0; i < mapObstacles.GetLength(0); i++)
+            {
+                for (int j = 0; j < mapObstacles.GetLength(1); j++)
+                {
+                    if (mapObstacles[i, j] == '1')
+                    {
+                        float obstacle_x1, obstacle_x2, obstacle_y1, obstacle_y2;
+
+                        obstacle_x1 = j * Mapa.MAP_UNIT_SIZE;
+                        obstacle_x2 = obstacle_x1 + Mapa.MAP_UNIT_SIZE;
+
+                        obstacle_y1 = i * Mapa.MAP_UNIT_SIZE;
+                        obstacle_y2 = obstacle_y1 + Mapa.MAP_UNIT_SIZE;
+
+                        Rectangle obstacleHitBox = new Rectangle(obstacle_x1, obstacle_x2, obstacle_y1, obstacle_y2);
+
+                        if (obstacleHitBox.CollideWithRectancle(playerHitBox))
+                            return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         public static bool CollideWithTrail(Player player, TrailSector trailSector)
         {
             float obstacle_x1 = 0, obstacle_x2 = 0, obstacle_y1 = 0, obstacle_y2 = 0;
@@ -156,6 +227,36 @@ namespace TRON
 
             Rectangle trailRect = new Rectangle(obstacle_x1, obstacle_x2, obstacle_y1, obstacle_y2);
             return trailRect.CollideWithRectancle(player.hitBox);
+        }
+
+        public static bool CollideWithTrail(Vector3 position, PlayerDirection direction, TrailSector trailSector)
+        {
+            float obstacle_x1 = 0, obstacle_x2 = 0, obstacle_y1 = 0, obstacle_y2 = 0;
+
+            switch (trailSector.direction)
+            {
+                case PlayerDirection.LEFT:
+                case PlayerDirection.RIGHT:
+                    obstacle_x1 = (float)trailSector.beginningPoint.X - TrailSector.TRAIL_DEPTH;
+                    obstacle_x2 = (float)trailSector.beginningPoint.X + TrailSector.TRAIL_DEPTH;
+
+                    obstacle_y1 = (float)trailSector.beginningPoint.Z;
+                    obstacle_y2 = (float)trailSector.endPoint.Z;
+                    break;
+
+                case PlayerDirection.UP:
+                case PlayerDirection.DOWN:
+                    obstacle_x1 = (float)trailSector.beginningPoint.X;
+                    obstacle_x2 = (float)trailSector.endPoint.X;
+
+                    obstacle_y1 = (float)trailSector.beginningPoint.Z - TrailSector.TRAIL_DEPTH;
+                    obstacle_y2 = (float)trailSector.endPoint.Z + TrailSector.TRAIL_DEPTH;
+                    break;
+            }
+
+            Rectangle playerHitBox = Rectangle.GetHitBox(position, direction);
+            Rectangle trailRect = new Rectangle(obstacle_x1, obstacle_x2, obstacle_y1, obstacle_y2);
+            return trailRect.CollideWithRectancle(playerHitBox);
         }
     }
 }

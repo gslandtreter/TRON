@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CollisionManager.cs" />
+    <Compile Include="AI.cs" />
     <Compile Include="ThirdPersonCamera.cs" />
     <Compile Include="DebugCamera.cs" />
     <Compile Include="Mapa.cs" />

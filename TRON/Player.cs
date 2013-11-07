@@ -50,16 +50,14 @@ namespace TRON
             trailHistory = new List<TrailSector>();
             
             currentTrail = new TrailSector(direction, color);
-            SetBegginingPos(mapObstacles);
+            SetBeginningPos(mapObstacles);
             //SetDirection(mapObstacles);
             
             directionChanged = false;
 
-            
-
         }
         
-        private void SetBegginingPos(char[,] mapObstacles)
+        private void SetBeginningPos(char[,] mapObstacles)
         {
             for (int i = 0; i < mapObstacles.GetLength(0); i++)
             {
@@ -67,8 +65,10 @@ namespace TRON
                 {
                     if (mapObstacles[i, j] == '2')
                     {
+                        
                         this.position = new Vector3(j * Mapa.MAP_UNIT_SIZE, 0, i * Mapa.MAP_UNIT_SIZE);
                         currentTrail.beginningPoint = new Vector3(j * Mapa.MAP_UNIT_SIZE, 0, i * Mapa.MAP_UNIT_SIZE);
+
                         mapObstacles[i, j] = '0';
                         return;
                     }
@@ -124,6 +124,13 @@ namespace TRON
             }
         }
 
+        public void setDirection(PlayerDirection newDir)
+        {
+            direction = newDir;
+            directionChanged = true;
+        }
+
+
         public void getNewDirection(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
         {
             //TODO: O movimento deve ser diferente na camera de cima. Ver definicao do trabalho.
@@ -138,20 +145,18 @@ namespace TRON
                 switch (direction)
                 {
                     case PlayerDirection.UP:
-                        direction = PlayerDirection.LEFT;
+                        setDirection(PlayerDirection.LEFT);
                         break;
                     case PlayerDirection.LEFT:
-                        direction = PlayerDirection.DOWN;
+                        setDirection(PlayerDirection.DOWN);
                         break;
                     case PlayerDirection.DOWN:
-                        direction = PlayerDirection.RIGHT;
+                        setDirection(PlayerDirection.RIGHT);
                         break;
                     case PlayerDirection.RIGHT:
-                        direction = PlayerDirection.UP;
+                        setDirection(PlayerDirection.UP);
                         break;
                 }
-
-                directionChanged = true;
             }
             else if (keyboard[OpenTK.Input.Key.Right])
             {
@@ -162,20 +167,18 @@ namespace TRON
                 switch (direction)
                 {
                     case PlayerDirection.UP:
-                        direction = PlayerDirection.RIGHT;
+                        setDirection(PlayerDirection.RIGHT);
                         break;
                     case PlayerDirection.LEFT:
-                        direction = PlayerDirection.UP;
+                        setDirection(PlayerDirection.UP);
                         break;
                     case PlayerDirection.DOWN:
-                        direction = PlayerDirection.LEFT;
+                        setDirection(PlayerDirection.LEFT);
                         break;
                     case PlayerDirection.RIGHT:
-                        direction = PlayerDirection.DOWN;
+                        setDirection(PlayerDirection.DOWN);
                         break;
                 }
-
-                directionChanged = true;
             }
         }
 
@@ -198,7 +201,8 @@ namespace TRON
 
         public void updatePlayerPos(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
         {
-            getNewDirection(keyboard, elapsedTime);
+            if(keyboard != null)
+                getNewDirection(keyboard, elapsedTime);
 
             if (directionChanged)
             {

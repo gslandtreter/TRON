@@ -22,6 +22,7 @@ namespace TRON
         //DebugCamera camera;
         ThirdPersonCamera thirdPersonCamera;
         TopCamera topCamera;
+        AI ai;
         Player player1;
         Player player2;
 
@@ -50,6 +51,9 @@ namespace TRON
 
             thirdPersonCamera = new ThirdPersonCamera();
             topCamera = new TopCamera();
+            ai = new AI();
+
+            ai.SetMapObstacles(myMap.mapObstacles);
             
             gamePlayers = new List<Player>();
             player1 = new Player(myMap.mapObstacles, Color.BlueViolet);
@@ -143,7 +147,14 @@ namespace TRON
                 if (!player.isAlive)
                     continue;
 
-                player.updatePlayerPos(Keyboard, e.Time);
+                if (player.isHumanPlayer)
+                    player.updatePlayerPos(Keyboard, e.Time);
+                else
+                {
+                    ai.Think(player, gamePlayers);
+                    player.updatePlayerPos(null, e.Time);
+                }
+                    
 
                 if (CollisionManager.CollideWithMap(player, myMap.mapObstacles))
                 {
