@@ -207,6 +207,13 @@ namespace TRON
             switch (trailSector.direction)
             {
                 case PlayerDirection.LEFT:
+                    obstacle_x1 = (float)trailSector.beginningPoint.X - TrailSector.TRAIL_DEPTH;
+                    obstacle_x2 = (float)trailSector.beginningPoint.X + TrailSector.TRAIL_DEPTH;
+
+                    obstacle_y2 = (float)trailSector.beginningPoint.Z;
+                    obstacle_y1 = (float)trailSector.endPoint.Z;
+                    break;
+
                 case PlayerDirection.RIGHT:
                     obstacle_x1 = (float)trailSector.beginningPoint.X - TrailSector.TRAIL_DEPTH;
                     obstacle_x2 = (float)trailSector.beginningPoint.X + TrailSector.TRAIL_DEPTH;
@@ -216,9 +223,16 @@ namespace TRON
                     break;
 
                 case PlayerDirection.UP:
-                case PlayerDirection.DOWN:
                     obstacle_x1 = (float)trailSector.beginningPoint.X;
                     obstacle_x2 = (float)trailSector.endPoint.X;
+
+                    obstacle_y1 = (float)trailSector.beginningPoint.Z - TrailSector.TRAIL_DEPTH;
+                    obstacle_y2 = (float)trailSector.endPoint.Z + TrailSector.TRAIL_DEPTH;
+                    break;
+
+                case PlayerDirection.DOWN:
+                    obstacle_x2 = (float)trailSector.beginningPoint.X;
+                    obstacle_x1 = (float)trailSector.endPoint.X;
 
                     obstacle_y1 = (float)trailSector.beginningPoint.Z - TrailSector.TRAIL_DEPTH;
                     obstacle_y2 = (float)trailSector.endPoint.Z + TrailSector.TRAIL_DEPTH;

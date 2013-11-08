@@ -7,7 +7,7 @@ namespace TRON
 {
     class AI
     {
-        float POSITION_LOOKAHEAD = 0.5f;
+        float POSITION_LOOKAHEAD = 0.2f;
 
         static public Player crashTestDummy = null;
 
