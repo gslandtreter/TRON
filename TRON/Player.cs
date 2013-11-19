@@ -131,53 +131,96 @@ namespace TRON
         }
 
 
-        public void getNewDirection(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
+        public void getNewDirection(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime, bool cameraMode)
         {
             //TODO: O movimento deve ser diferente na camera de cima. Ver definicao do trabalho.
             inputTimeBuffer += elapsedTime;
 
-            if (keyboard[OpenTK.Input.Key.Left])
+            if (!cameraMode) //3rd person
             {
-                if (inputTimeBuffer < INPUT_DELAY)
-                    return;
-                else inputTimeBuffer = 0;
-
-                switch (direction)
+                if (keyboard[OpenTK.Input.Key.Left])
                 {
-                    case PlayerDirection.UP:
-                        setDirection(PlayerDirection.LEFT);
-                        break;
-                    case PlayerDirection.LEFT:
-                        setDirection(PlayerDirection.DOWN);
-                        break;
-                    case PlayerDirection.DOWN:
-                        setDirection(PlayerDirection.RIGHT);
-                        break;
-                    case PlayerDirection.RIGHT:
-                        setDirection(PlayerDirection.UP);
-                        break;
+                    if (inputTimeBuffer < INPUT_DELAY)
+                        return;
+                    else inputTimeBuffer = 0;
+
+                    switch (direction)
+                    {
+                        case PlayerDirection.UP:
+                            setDirection(PlayerDirection.LEFT);
+                            break;
+                        case PlayerDirection.LEFT:
+                            setDirection(PlayerDirection.DOWN);
+                            break;
+                        case PlayerDirection.DOWN:
+                            setDirection(PlayerDirection.RIGHT);
+                            break;
+                        case PlayerDirection.RIGHT:
+                            setDirection(PlayerDirection.UP);
+                            break;
+                    }
+                }
+                else if (keyboard[OpenTK.Input.Key.Right])
+                {
+                    if (inputTimeBuffer < INPUT_DELAY)
+                        return;
+                    else inputTimeBuffer = 0;
+
+                    switch (direction)
+                    {
+                        case PlayerDirection.UP:
+                            setDirection(PlayerDirection.RIGHT);
+                            break;
+                        case PlayerDirection.LEFT:
+                            setDirection(PlayerDirection.UP);
+                            break;
+                        case PlayerDirection.DOWN:
+                            setDirection(PlayerDirection.LEFT);
+                            break;
+                        case PlayerDirection.RIGHT:
+                            setDirection(PlayerDirection.DOWN);
+                            break;
+                    }
                 }
             }
-            else if (keyboard[OpenTK.Input.Key.Right])
-            {
-                if (inputTimeBuffer < INPUT_DELAY)
-                    return;
-                else inputTimeBuffer = 0;
 
-                switch (direction)
+            else //Top View
+            {
+                if (keyboard[OpenTK.Input.Key.Left])
                 {
-                    case PlayerDirection.UP:
-                        setDirection(PlayerDirection.RIGHT);
-                        break;
-                    case PlayerDirection.LEFT:
-                        setDirection(PlayerDirection.UP);
-                        break;
-                    case PlayerDirection.DOWN:
+                    if (inputTimeBuffer < INPUT_DELAY)
+                        return;
+                    else inputTimeBuffer = 0;
+
+                    if(direction != PlayerDirection.RIGHT && direction != PlayerDirection.LEFT)
                         setDirection(PlayerDirection.LEFT);
-                        break;
-                    case PlayerDirection.RIGHT:
+                }
+                else if (keyboard[OpenTK.Input.Key.Right])
+                {
+                    if (inputTimeBuffer < INPUT_DELAY)
+                        return;
+                    else inputTimeBuffer = 0;
+
+                    if (direction != PlayerDirection.RIGHT && direction != PlayerDirection.LEFT)
+                        setDirection(PlayerDirection.RIGHT);
+                }
+                else if (keyboard[OpenTK.Input.Key.Up])
+                {
+                    if (inputTimeBuffer < INPUT_DELAY)
+                        return;
+                    else inputTimeBuffer = 0;
+
+                    if (direction != PlayerDirection.UP && direction != PlayerDirection.DOWN)
+                        setDirection(PlayerDirection.UP);
+                }
+                else if (keyboard[OpenTK.Input.Key.Down])
+                {
+                    if (inputTimeBuffer < INPUT_DELAY)
+                        return;
+                    else inputTimeBuffer = 0;
+
+                    if (direction != PlayerDirection.UP && direction != PlayerDirection.DOWN)
                         setDirection(PlayerDirection.DOWN);
-                        break;
                 }
             }
         }
@@ -199,10 +242,10 @@ namespace TRON
             this.isAlive = false;
         }
 
-        public void updatePlayerPos(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime)
+        public void updatePlayerPos(OpenTK.Input.KeyboardDevice keyboard, double elapsedTime, bool cameraMode)
         {
             if(keyboard != null)
-                getNewDirection(keyboard, elapsedTime);
+                getNewDirection(keyboard, elapsedTime, cameraMode);
 
             if (directionChanged)
             {

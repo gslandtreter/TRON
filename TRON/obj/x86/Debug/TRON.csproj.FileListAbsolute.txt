@@ -65,3 +65,12 @@ C:\Users\rodrigo\Desktop\TRON-master\TRON\bin\Debug\OpenTK.xml
 C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
 C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
 C:\Users\rodrigo\Desktop\TRON-master\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\bin\Debug\TRON.exe.config
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.exe
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.pdb
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\bin\Debug\TRON.exe
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\bin\Debug\TRON.pdb
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\bin\Debug\OpenTK.xml
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
+C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache

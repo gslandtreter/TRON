@@ -66,19 +66,19 @@ namespace TRON
                 if (!collisionTestPlayer.isAlive)
                     continue;
 
-                if (player != collisionTestPlayer && CollisionManager.CollideWithTrail(furtherPos, player.direction, collisionTestPlayer.currentTrail))
+                if (player != collisionTestPlayer &&  CollisionManager.CollideWithTrail(furtherPos, player.direction, collisionTestPlayer.currentTrail))
                     return true;
-
+                
                 if (player != collisionTestPlayer && hitBox.CollideWithRectancle(collisionTestPlayer.hitBox))
                     return true;
 
                 foreach (TrailSector trailSector in collisionTestPlayer.trailHistory)
                 {
-                    if (collisionTestPlayer == player && trailSector.isFirstOnHistory)
-                        continue;
-
-                    if (CollisionManager.CollideWithTrail(furtherPos, player.direction, trailSector))
-                        return true;
+                    if (collisionTestPlayer != player || !trailSector.isFirstOnHistory)
+                    {
+                        if (CollisionManager.CollideWithTrail(furtherPos, player.direction, trailSector))
+                            return true;
+                    }
                 }
             }
             return false;

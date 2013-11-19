@@ -17,6 +17,10 @@ namespace TRON
     /// </summary>
     public class TRONWindow : GameWindow
     {
+
+        private static int WINDOW_WIDTH = 800;
+        private static int WINDOW_HEIGHT = 600;
+
         Mesh cycle;
         Mapa myMap;
         //DebugCamera camera;
@@ -25,6 +29,7 @@ namespace TRON
         AI ai;
         Player player1;
         Player player2;
+        Player player3;
 
         List<Player> gamePlayers;
         bool cameraMode = false;
@@ -36,7 +41,7 @@ namespace TRON
         float[] position = { 15, 15, 15 };
 
         public TRONWindow()
-            : base(800, 600, new GraphicsMode(16, 16), "TRON")
+            : base(WINDOW_WIDTH, WINDOW_HEIGHT, new GraphicsMode(16, 16), "TRON")
         {
            
         }
@@ -58,6 +63,7 @@ namespace TRON
             gamePlayers = new List<Player>();
             player1 = new Player(myMap.mapObstacles, Color.BlueViolet);
             player2 = new Player(myMap.mapObstacles, Color.Crimson);
+            player3 = new Player(myMap.mapObstacles,Color.Pink);
 
             GL.ClearColor(Color.Black);
             GL.Enable(EnableCap.DepthTest);
@@ -86,6 +92,7 @@ namespace TRON
             {
                 player1.textureID = cycle.LoadTexture("Textures//bike blue.png"); //TODO: Wrap to texture loader
                 player2.textureID = cycle.LoadTexture("Textures//bike red.png"); //TODO: Wrap to texture loader
+                player3.textureID = cycle.LoadTexture("Textures//bike rose.png");
 
                 myMap.texturaChao = Texture.LoadTex("Textures//grid.jpg");
                 myMap.texturaParede = Texture.LoadTex("Textures//wall2.jpg");
@@ -94,14 +101,16 @@ namespace TRON
 
                 player1.mesh = cycle;
                 player2.mesh = cycle;
+                player3.mesh = cycle;
             }
 
             player1.isHumanPlayer = true;
             player2.speed = 12;
-
+            player3.speed = 12;
             
             gamePlayers.Add(player1);
             gamePlayers.Add(player2);
+            gamePlayers.Add(player3);
         }
 
         /// <summary>
@@ -148,11 +157,11 @@ namespace TRON
                     continue;
 
                 if (player.isHumanPlayer)
-                    player.updatePlayerPos(Keyboard, e.Time);
+                    player.updatePlayerPos(Keyboard, e.Time, cameraMode);
                 else
                 {
                     ai.Think(player, gamePlayers);
-                    player.updatePlayerPos(null, e.Time);
+                    player.updatePlayerPos(null, e.Time, cameraMode);
                 }
                     
 
@@ -203,17 +212,8 @@ namespace TRON
             }
         }
 
-        protected override void OnRenderFrame(FrameEventArgs e)
+        protected void DrawGame()
         {
-            base.OnRenderFrame(e);
-
-            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
-
-            if(cameraMode)
-                topCamera.doCamera(myMap.sizeX * Mapa.MAP_UNIT_SIZE, myMap.sizeY * Mapa.MAP_UNIT_SIZE);
-            else
-                thirdPersonCamera.doCameraOnPlayer(gamePlayers.Find(i => i.isHumanPlayer));
-
             foreach (Player player in gamePlayers)
             {
                 if (!player.isAlive)
@@ -223,7 +223,7 @@ namespace TRON
                 player.drawTrail();
             }
 
-            
+
             //REFLECTION
 
             GL.Enable(EnableCap.StencilTest);
@@ -255,9 +255,42 @@ namespace TRON
             GL.PopMatrix();
             GL.Disable(EnableCap.StencilTest);
             //ENDOF Reflection
-       
+
             myMap.Render();
 
+        }
+        protected override void OnRenderFrame(FrameEventArgs e)
+        {
+            base.OnRenderFrame(e);
+
+            GL.Clear(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit);
+
+
+
+            if (cameraMode)
+            {
+                GL.Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+                topCamera.doCamera(myMap.sizeX * Mapa.MAP_UNIT_SIZE, myMap.sizeY * Mapa.MAP_UNIT_SIZE);
+                DrawGame();
+            }
+
+            else
+            {
+                GL.Viewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
+                thirdPersonCamera.doCameraOnPlayer(gamePlayers.Find(i => i.isHumanPlayer));
+
+                DrawGame();
+
+                GL.Clear(ClearBufferMask.DepthBufferBit);
+
+                GL.Viewport(0, WINDOW_HEIGHT - 150, 180, 150);
+
+                topCamera.doCamera(myMap.sizeX * Mapa.MAP_UNIT_SIZE, myMap.sizeY * Mapa.MAP_UNIT_SIZE);
+
+                DrawGame();
+
+                
+            }
             this.SwapBuffers();
         }
 
