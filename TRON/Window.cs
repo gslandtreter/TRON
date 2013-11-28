@@ -92,7 +92,7 @@ namespace TRON
             {
                 player1.textureID = cycle.LoadTexture("Textures//bike blue.png"); //TODO: Wrap to texture loader
                 player2.textureID = cycle.LoadTexture("Textures//bike red.png"); //TODO: Wrap to texture loader
-                player3.textureID = cycle.LoadTexture("Textures//bike rose.png");
+              player3.textureID = cycle.LoadTexture("Textures//bike rose.png");
 
                 myMap.texturaChao = Texture.LoadTex("Textures//grid.jpg");
                 myMap.texturaParede = Texture.LoadTex("Textures//wall2.jpg");
