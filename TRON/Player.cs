@@ -42,7 +42,7 @@ namespace TRON
         public Player(char[,] mapObstacles, Color playerColor)
         {
             color = playerColor;
-            speed = 10.0f;
+            speed = 12.0f;
             direction = PlayerDirection.UP;
             isHumanPlayer = false;
             isAlive = true;         

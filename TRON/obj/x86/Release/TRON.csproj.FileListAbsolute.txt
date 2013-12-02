@@ -1,0 +1,11 @@
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\TRON.exe.config
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\TRON.exe
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\TRON.pdb
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\OpenTK.dll
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\QuickFont.dll
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\OpenTK.xml
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Release\QuickFont.pdb
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Release\TRON.Properties.Resources.resources
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Release\TRON.csproj.GenerateResource.Cache
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Release\TRON.exe
+D:\Gustavo\Documentos\GitHub\TRON\TRON\obj\x86\Release\TRON.pdb

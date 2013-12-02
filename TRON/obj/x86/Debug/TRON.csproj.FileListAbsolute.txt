@@ -74,3 +74,5 @@ C:\Users\rodrigo\Documents\GitHub\TRON\TRON\bin\Debug\OpenTK.xml
 C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.csprojResolveAssemblyReference.cache
 C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.Properties.Resources.resources
 C:\Users\rodrigo\Documents\GitHub\TRON\TRON\obj\x86\Debug\TRON.csproj.GenerateResource.Cache
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\QuickFont.dll
+D:\Gustavo\Documentos\GitHub\TRON\TRON\bin\Debug\QuickFont.pdb

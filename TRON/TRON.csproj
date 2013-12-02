@@ -36,6 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="OpenTK, Version=1.0.0.0, Culture=neutral, PublicKeyToken=bad199fe84eb3df4, processorArchitecture=MSIL" />
+    <Reference Include="QuickFont">
+      <HintPath>..\QuickFont\bin\Release\QuickFont.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -47,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CollisionManager.cs" />
     <Compile Include="AI.cs" />
+    <Compile Include="GameLogic.cs" />
     <Compile Include="ThirdPersonCamera.cs" />
     <Compile Include="DebugCamera.cs" />
     <Compile Include="Mapa.cs" />

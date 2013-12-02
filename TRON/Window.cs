@@ -8,6 +8,7 @@ using System.Drawing;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
+using QuickFont;
 
 
 namespace TRON
@@ -30,9 +31,11 @@ namespace TRON
         Player player1;
         Player player2;
         Player player3;
+        QFont mainFont;
 
         List<Player> gamePlayers;
         bool cameraMode = false;
+        bool hasWon = false;
 
 
         float[] ambientLight = { 0.2f, 0.2f, 0.8f };
@@ -92,7 +95,7 @@ namespace TRON
             {
                 player1.textureID = cycle.LoadTexture("Textures//bike blue.png"); //TODO: Wrap to texture loader
                 player2.textureID = cycle.LoadTexture("Textures//bike red.png"); //TODO: Wrap to texture loader
-              player3.textureID = cycle.LoadTexture("Textures//bike rose.png");
+                player3.textureID = cycle.LoadTexture("Textures//bike mix1.png");
 
                 myMap.texturaChao = Texture.LoadTex("Textures//grid.jpg");
                 myMap.texturaParede = Texture.LoadTex("Textures//wall2.jpg");
@@ -105,12 +108,14 @@ namespace TRON
             }
 
             player1.isHumanPlayer = true;
-            player2.speed = 12;
-            player3.speed = 12;
             
             gamePlayers.Add(player1);
             gamePlayers.Add(player2);
             gamePlayers.Add(player3);
+
+            mainFont = new QFont("Anonymous.ttf", 64.0f);
+            mainFont.Options.Colour = Color4.Blue;
+            mainFont.Options.CharacterSpacing += 0.5f;
         }
 
         /// <summary>
@@ -153,6 +158,7 @@ namespace TRON
 
             foreach (Player player in gamePlayers)
             {
+
                 if (!player.isAlive)
                     continue;
 
@@ -199,6 +205,8 @@ namespace TRON
                 }
 
             }
+
+            
 
         }
 
@@ -258,6 +266,25 @@ namespace TRON
 
             myMap.Render();
 
+
+            if (GameLogic.IsGameOver(gamePlayers))
+            {
+                if (gamePlayers.Find(i => i.isHumanPlayer).isAlive || hasWon)
+                {
+                    QFont.Begin();
+                    mainFont.Print("GANHOU!", new OpenTK.Vector2(250, 50));
+                    QFont.End();
+
+                    if(!hasWon)
+                        hasWon = true;
+                }
+                else if(!hasWon)
+                {
+                    QFont.Begin();
+                    mainFont.Print("PERDEU!", new OpenTK.Vector2(250, 50));
+                    QFont.End();
+                }
+            }
         }
         protected override void OnRenderFrame(FrameEventArgs e)
         {
